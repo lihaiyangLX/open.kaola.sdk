@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="TRACE"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyy-MM-dd HH:mm:ss:SSS}][%p][%t] %30.30c %x: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="TRACE" />
+			<param name="LevelMin" value="TRACE" />
+		</filter>
+	</appender>
+	<appender name="DEBUG" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.base}/logs/soomey.debug.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="10000KB" />
+		<param name="MaxBackupIndex" value="6" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyy-MM-dd HH:mm:ss:SSS}][%p][%t] %30.30c %x: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="DEBUG" />
+			<param name="LevelMin" value="TRACE" />
+		</filter>
+	</appender>
+	<appender name="SQLLOG" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.base}/logs/soomey.sql.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="100000KB" />
+		<param name="MaxBackupIndex" value="6" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyy-MM-dd HH:mm:ss:SSS}][%p][%t] %30.30c %x: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="DEBUG" />
+			<param name="LevelMin" value="TRACE" />
+		</filter>
+	</appender>
+	<appender name="INFO" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.base}/logs/soomey.info.log" />
+		<param name="Encoding" value="UTF-8" />  
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="10000KB" />
+		<param name="MaxBackupIndex" value="6" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="INFO" />
+			<param name="LevelMin" value="INFO" />
+		</filter>
+	</appender>
+	<appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.base}/logs/soomey.error.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="10000KB" />
+		<param name="MaxBackupIndex" value="6" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="ERROR" />
+			<param name="LevelMin" value="WARN" />
+		</filter>
+	</appender>
+	<!-- 启用hibernate SQL 日志用于调试性能优化 start -->
+	<!-- <logger name="org.hibernate.type.descriptor.sql.BasicBinder">
+		<level value="TRACE" />
+		<appender-ref ref="SQLLOG" />
+	</logger>
+	<logger name="org.hibernate.engine.QueryParameters">
+		<level value="TRACE" />
+		<appender-ref ref="SQLLOG" />
+	</logger>
+	<logger name="org.hibernate">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.hibernate.SQL">
+		<level value="DEBUG" />
+		<appender-ref ref="SQLLOG" />
+	</logger>
+	<logger name="org.hibernate.HQL">
+		<level value="DEBUG" />
+		<appender-ref ref="SQLLOG" />
+	</logger>
+	<logger name="org.hibernate.engine.query.HQLQueryPlan">
+		<level value="TRACE" />
+	</logger> -->
+	<!-- 启用hibernate SQL 日志用于调试性能优化 end -->
+	
+	<!-- 屏蔽hibernate的debug和info日志 -->
+	<logger name="org.hibernate">
+		<level value="ERROR"></level>
+	</logger>
+	<!-- 屏蔽hibernate的debug和info日志  end-->
+	
+	<root>
+	<!-- 启用hibernate SQL 日志用于调试性能优化 关闭info和debug，启用stdout和error， 同时放开hibernate.properties里面的三个sql相关属性配置 -->
+ 		<appender-ref ref="INFO" />
+		<appender-ref ref="DEBUG" />
+		<!-- <appender-ref ref="STDOUT" /> -->
+		<appender-ref ref="ERROR" /> 
+	</root>
+</log4j:configuration>

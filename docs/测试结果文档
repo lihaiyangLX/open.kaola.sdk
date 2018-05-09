@@ -1,0 +1,17 @@
+comm.vender接口测试完毕
+
+kaola.comm接口测试完毕
+
+问题：
+
+	1. KaolaVenderCategoryGetResponse在反序列化时,发现数据有异,属性item_cats首字母大写会导致无法用系统的反序列化方法,需要toLowerCase后才可： 
+
+		 "kaola_vender_category_get_response": {
+	        "Item_cats": [
+	            {
+	                "category_id": 29301,
+	                "category_level": 2,
+	                "category_name": "服饰鞋靴",
+	                "is_leaf": 0,
+	                "parent_id": 349
+	            },
