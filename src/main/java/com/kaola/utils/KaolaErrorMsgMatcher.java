@@ -20,4 +20,9 @@ public class KaolaErrorMsgMatcher {
 		skuStockUpdateErrorMap.put("Sku_null", "不存在的sku");
 		skuStockUpdateErrorMap.put("Stock_little_than_negative", "总库存不能小于冻结库存");
 	}
+
+	public static String matcher(String errorCode) {
+
+		return skuStockUpdateErrorMap.getOrDefault(errorCode, errorCode);
+	}
 }
