@@ -29,12 +29,13 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.soomey.bean.log.JsonLogger;
+import com.soomey.bean.log.JsonLogger.JsonLoggerFactory;
 
 public class HttpsClient {
 
-	private static final Logger logger = LoggerFactory.getLogger(HttpsClient.class);
+	private static final JsonLogger logger = JsonLoggerFactory.getLogger(HttpsClient.class);
 
 	public static String doPost(String uri, Map<String, String> params) {
 

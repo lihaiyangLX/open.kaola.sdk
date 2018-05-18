@@ -10,13 +10,12 @@ import java.util.Map;
 
 import javax.ws.rs.core.Response.Status;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kaola.base.KaolaRequest;
 import com.kaola.base.KaolaUploadRequest;
 import com.soomey.bean.collection.MultiValueHashMap;
+import com.soomey.bean.log.JsonLogger;
+import com.soomey.bean.log.JsonLogger.JsonLoggerFactory;
 import com.soomey.bean.message.Reply;
 import com.soomey.util.DateFormatUtils;
 import com.soomey.util.JsonUtils;
@@ -25,7 +24,7 @@ import com.soomey.util.WebUtils;
 
 public class KaolaClient {
 
-	private Logger logger = LoggerFactory.getLogger(KaolaClient.class);
+	private static final JsonLogger logger = JsonLoggerFactory.getLogger(KaolaClient.class);
 
 	private String access_token;
 
