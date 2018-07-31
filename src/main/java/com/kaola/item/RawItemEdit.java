@@ -35,6 +35,46 @@ public class RawItemEdit {
 
 	private String description; // 商品描述
 
+	private int item_edit_status;
+
+	private String tax_code;
+
+	private String tax_code_name;
+
+	private Double tax_code_rate;
+
+	private String unit_code;
+
+	private String unit_code_name;
+
+	private String hs_id;
+
+	private String hs_code;
+
+	private String item_unit;
+
+	private String first_unit;
+
+	private String seconde_unit;
+
+	private String second_unit_num;
+
+	private Double gross_weight;
+
+	private int allow_7_day_refund;
+
+	private String update_time;
+
+	private String consumer_code;
+
+	private String enName;
+
+	private String item_type;
+
+	private String outer_id;
+
+	private String vat_code;
+
 	public Long getId() {
 		return id;
 	}
@@ -145,5 +185,165 @@ public class RawItemEdit {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getItem_edit_status() {
+		return item_edit_status;
+	}
+
+	public void setItem_edit_status(int item_edit_status) {
+		this.item_edit_status = item_edit_status;
+	}
+
+	public String getTax_code() {
+		return tax_code;
+	}
+
+	public void setTax_code(String tax_code) {
+		this.tax_code = tax_code;
+	}
+
+	public String getTax_code_name() {
+		return tax_code_name;
+	}
+
+	public void setTax_code_name(String tax_code_name) {
+		this.tax_code_name = tax_code_name;
+	}
+
+	public Double getTax_code_rate() {
+		return tax_code_rate;
+	}
+
+	public void setTax_code_rate(Double tax_code_rate) {
+		this.tax_code_rate = tax_code_rate;
+	}
+
+	public String getUnit_code() {
+		return unit_code;
+	}
+
+	public void setUnit_code(String unit_code) {
+		this.unit_code = unit_code;
+	}
+
+	public String getUnit_code_name() {
+		return unit_code_name;
+	}
+
+	public void setUnit_code_name(String unit_code_name) {
+		this.unit_code_name = unit_code_name;
+	}
+
+	public String getHs_id() {
+		return hs_id;
+	}
+
+	public void setHs_id(String hs_id) {
+		this.hs_id = hs_id;
+	}
+
+	public String getHs_code() {
+		return hs_code;
+	}
+
+	public void setHs_code(String hs_code) {
+		this.hs_code = hs_code;
+	}
+
+	public String getItem_unit() {
+		return item_unit;
+	}
+
+	public void setItem_unit(String item_unit) {
+		this.item_unit = item_unit;
+	}
+
+	public String getFirst_unit() {
+		return first_unit;
+	}
+
+	public void setFirst_unit(String first_unit) {
+		this.first_unit = first_unit;
+	}
+
+	public String getSeconde_unit() {
+		return seconde_unit;
+	}
+
+	public void setSeconde_unit(String seconde_unit) {
+		this.seconde_unit = seconde_unit;
+	}
+
+	public String getSecond_unit_num() {
+		return second_unit_num;
+	}
+
+	public void setSecond_unit_num(String second_unit_num) {
+		this.second_unit_num = second_unit_num;
+	}
+
+	public Double getGross_weight() {
+		return gross_weight;
+	}
+
+	public void setGross_weight(Double gross_weight) {
+		this.gross_weight = gross_weight;
+	}
+
+	public int getAllow_7_day_refund() {
+		return allow_7_day_refund;
+	}
+
+	public void setAllow_7_day_refund(int allow_7_day_refund) {
+		this.allow_7_day_refund = allow_7_day_refund;
+	}
+
+	public String getUpdate_time() {
+		return update_time;
+	}
+
+	public void setUpdate_time(String update_time) {
+		this.update_time = update_time;
+	}
+
+	public String getConsumer_code() {
+		return consumer_code;
+	}
+
+	public void setConsumer_code(String consumer_code) {
+		this.consumer_code = consumer_code;
+	}
+
+	public String getEnName() {
+		return enName;
+	}
+
+	public void setEnName(String enName) {
+		this.enName = enName;
+	}
+
+	public String getItem_type() {
+		return item_type;
+	}
+
+	public void setItem_type(String item_type) {
+		this.item_type = item_type;
+	}
+
+	public String getOuter_id() {
+		return outer_id;
+	}
+
+	public void setOuter_id(String outer_id) {
+		this.outer_id = outer_id;
+	}
+
+	public String getVat_code() {
+		return vat_code;
+	}
+
+	public void setVat_code(String vat_code) {
+		this.vat_code = vat_code;
 	}
 }

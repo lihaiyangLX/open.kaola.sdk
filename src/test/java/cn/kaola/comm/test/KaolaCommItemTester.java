@@ -28,14 +28,14 @@ import com.soomey.util.JsonUtils;
  */
 public class KaolaCommItemTester extends KaolaCommBaseTester {
 
-	private final String TEST_IMAGE_PATH = "C:/Users/super_L/Desktop/1688/testPictureUpload.jpg";// 图片本地地址
+	private final String TEST_IMAGE_PATH = "C:/Users/super_L/Desktop/1688/testPictureUpload1.jpg";// 图片本地地址
 
 	@Test
 	public void test_imageUpload() throws IOException {
 
 		KaolaItemImgUploadRequest request = new KaolaItemImgUploadRequest(new FileItem(TEST_IMAGE_PATH));
 
-		JsonNode result = client.excuteUpload(request);
+		JsonNode result = client.executeUpload(request);
 		System.out.println(result);
 		KaolaItemImgUploadResponse response = JsonUtils.parse(result.toString(), KaolaItemImgUploadResponse.class);
 		assertTrue(StringUtils.isNotBlank(response.getUrl()));
@@ -53,7 +53,7 @@ public class KaolaCommItemTester extends KaolaCommBaseTester {
 
 		KaolaItempropsGetRequest request = new KaolaItempropsGetRequest();
 		request.setCategory_id(29307L);
-		JsonNode result = client.excute(request);
+		JsonNode result = client.execute(request);
 		KaolaItempropsGetResponse response = (KaolaItempropsGetResponse) JsonUtils.parse(result.toString(), request.getResponseClass());
 		System.out.println(JsonUtils.toJson(response));
 		System.out.println(result);

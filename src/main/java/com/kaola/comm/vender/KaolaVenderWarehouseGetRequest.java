@@ -9,7 +9,7 @@ import com.kaola.base.KaolaRequest;
  */
 public class KaolaVenderWarehouseGetRequest extends KaolaRequest {
 
-	public KaolaVenderWarehouseGetRequest() {
+	public KaolaVenderWarehouseGetRequest() { // kaola.vender.warehouse.get 
 		super("kaola.vender.warehouse.get", KaolaVenderWarehouseGetResponse.class);
 	}
 

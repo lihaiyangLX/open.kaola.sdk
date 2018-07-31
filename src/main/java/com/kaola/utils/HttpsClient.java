@@ -32,6 +32,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.soomey.bean.log.JsonLogger;
 import com.soomey.bean.log.JsonLogger.JsonLoggerFactory;
+import com.soomey.util.JsonUtils;
 
 public class HttpsClient {
 
@@ -40,7 +41,7 @@ public class HttpsClient {
 	public static String doPost(String uri, Map<String, String> params) {
 
 		logger.info("https doPost uri = " + uri + " and params = " + params);
-		String responseContent = null; // 响应内容
+		String responseContent = ""; // 响应内容
 		PoolingHttpClientConnectionManager connManager = null;
 
 		try {
@@ -67,11 +68,14 @@ public class HttpsClient {
 			httpPost.setEntity(new UrlEncodedFormEntity(formParams, "UTF-8"));
 
 			HttpResponse response = client.execute(httpPost); // 执行POST请求
+			logger.info("excute response is " + (response != null ? JsonUtils.toJson(response) : null));
 
 			if (response != null && response.getStatusLine().getStatusCode() == 200) {
 
 				HttpEntity entity = response.getEntity(); // 获取响应实体
+				System.out.println("entity is " + entity!= null ? JsonUtils.toJson(entity) : null);
 
+				logger.info("entity is " + entity!= null ? JsonUtils.toJson(entity) : null);
 				if (entity != null) {
 
 					boolean isGzip = Arrays.asList(response.getAllHeaders()).stream()

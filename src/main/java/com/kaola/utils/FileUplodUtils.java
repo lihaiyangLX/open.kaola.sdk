@@ -8,6 +8,9 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,9 +18,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.kaola.base.FileItem;
+import com.soomey.bean.log.JsonLogger;
+import com.soomey.bean.log.JsonLogger.JsonLoggerFactory;
 
 /**
  * 图片上传工具
@@ -25,6 +34,8 @@ import com.kaola.base.FileItem;
  * 2018年3月29日
  */
 public class FileUplodUtils {
+
+	private static JsonLogger logger = JsonLoggerFactory.getLogger(FileUplodUtils.class);
 
 	private static final String DEFAULT_CHARSET = "UTF-8";
 
@@ -43,9 +54,11 @@ public class FileUplodUtils {
 	 */
 	public static String doPost(String url, Map<String, Object> params, Map<String, FileItem> fileParams, int connectTimeout, int readTimeout) throws IOException {
 
+		logger.info("FileUploadUtils do Post with url " + url);
 		String charset = DEFAULT_CHARSET;
 		String boundary = System.currentTimeMillis() + ""; // 随机分隔线
 		HttpURLConnection conn = null;
+//		HttpsURLConnection conn = null;
 		OutputStream out = null;
 		String rsp = null;		
 		try {
@@ -107,6 +120,18 @@ public class FileUplodUtils {
 		conn.setRequestProperty("Content-Type", ctype);
 		return conn;
 	}
+//
+//	private static HttpsURLConnection getConnection(URL url, String method, String ctype) throws IOException {
+//
+//		HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+//		conn.setRequestMethod(method);
+//		conn.setDoInput(true);
+//		conn.setDoOutput(true);
+//		conn.setRequestProperty("Accept", "text/xml,text/javascript,text/html");
+//		conn.setRequestProperty("User-Agent", "kaola-sdk-java");
+//		conn.setRequestProperty("Content-Type", ctype);
+//		return conn;
+//	}
 
 	private static byte[] getTextEntry(String fieldName, String fieldValue, String charset) throws IOException {
 
@@ -214,5 +239,30 @@ public class FileUplodUtils {
 		entry.append(mimeType);
 		entry.append("\r\n\r\n");
 		return entry.toString().getBytes(charset);
+	}
+
+	public static SSLContext createIgnoreVerifySSL() throws NoSuchAlgorithmException, KeyManagementException {
+
+		SSLContext sc = SSLContext.getInstance("SSLv3");
+
+		X509TrustManager trustManager = new X509TrustManager() {
+			@Override
+			public void checkClientTrusted(java.security.cert.X509Certificate[] paramArrayOfX509Certificate,
+					String paramString) throws CertificateException {
+			}
+
+			@Override
+			public void checkServerTrusted(java.security.cert.X509Certificate[] paramArrayOfX509Certificate,
+					String paramString) throws CertificateException {
+			}
+
+			@Override
+			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+				return null;
+			}
+		};
+
+		sc.init(null, new TrustManager[] { trustManager }, null);
+		return sc;
 	}
 }

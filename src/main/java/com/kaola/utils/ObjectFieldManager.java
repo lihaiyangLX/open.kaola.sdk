@@ -10,6 +10,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.soomey.util.JsonUtils;
+
+
 /**
  * 类属性处理器
  * @author LiHaiyang
@@ -44,6 +47,35 @@ public class ObjectFieldManager {
 		return objectValues;
 	}
 
+	public static Map<String, String> StringMapReader(Object object) {
+
+		Map<String, String> objectValues = new HashMap<>();
+
+		List<Field> fields = getFields(object.getClass(), null);
+		Class<?> clazz = object.getClass();
+		fields.forEach(field -> {
+
+			String fieldName = field.getName();
+			if (!"logger".equalsIgnoreCase(fieldName) && !"image".equals(fieldName)) { // 如果不为logger的话继续
+
+				Object value = null;
+				try {
+
+					Method m = clazz.getMethod(composeMethodName("get", fieldName));
+					value = m.invoke(object);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (value != null && StringUtils.isNotBlank(String.valueOf(value))) {
+
+					objectValues.put(fieldName, String.valueOf(value));
+				}
+			}
+		});
+
+		return objectValues;
+	}
+
 	public static Object pushValues(Object object, Map<Object, Object> values) {
 
 		List<Field> fields = getFields(object.getClass(), null);
@@ -55,9 +87,15 @@ public class ObjectFieldManager {
 
 				try {
 
-					Method m = clazz.getMethod(composeMethodName("set", fieldName), field.getType());
-					m.invoke(object, field.getType().cast(values.get(fieldName)));
+					Class<?> fieldType = field.getType();
+					Method m = clazz.getMethod(composeMethodName("set", fieldName), fieldType);
+//					m.invoke(object, field.getType().cast(values.get(fieldName)));
+
+					m.invoke(object, fieldType.getSuperclass() != null
+										? JsonUtils.parse(values.get(fieldName).toString(), fieldType)
+										: fieldType.cast(values.get(fieldName)));
 				} catch (Exception e) {
+
 					e.printStackTrace();
 				}
 			}

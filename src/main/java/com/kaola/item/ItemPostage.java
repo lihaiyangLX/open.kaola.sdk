@@ -21,6 +21,8 @@ public class ItemPostage extends Item {
 
 	private String postage_template_id; // 运费模板id
 
+	private int high_postage_reason_id;
+
 	public int getIs_postage_free() {
 		return is_postage_free;
 	}
@@ -59,5 +61,13 @@ public class ItemPostage extends Item {
 
 	public void setPostage_template_id(String postage_template_id) {
 		this.postage_template_id = postage_template_id;
+	}
+
+	public int getHigh_postage_reason_id() {
+		return high_postage_reason_id;
+	}
+
+	public void setHigh_postage_reason_id(int high_postage_reason_id) {
+		this.high_postage_reason_id = high_postage_reason_id;
 	}
 }

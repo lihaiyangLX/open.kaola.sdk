@@ -8,12 +8,17 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.soomey.bean.log.JsonLogger;
+import com.soomey.bean.log.JsonLogger.JsonLoggerFactory;
+
 /**
  * 数据组装工具
  * @author LiHaiyang
  * 2018年3月20日
  */
 public class ValuesComposer {
+
+	private static JsonLogger logger = JsonLoggerFactory.getLogger(ValuesComposer.class);
 
 	private final static String DEFAULT_ENCODE = "UTF-8";
 
@@ -29,9 +34,10 @@ public class ValuesComposer {
 		ignoreParamNames.forEach(key -> paramValues.remove(key));
 
 		List<String> values = paramValues.entrySet().stream()
-												.filter(entry -> StringUtils.isNoneBlank(entry.getKey(), String.valueOf(entry.getValue())))
+												.filter(entry -> StringUtils.isNoneBlank(entry.getKey(), String.valueOf(entry.getValue())) && entry.getValue() != null)
 												.map(entry -> toBeEncodeValue ? toEncodedValue(entry, fieldSeparator) : noEncodeValue(entry, separator))
 												.collect(Collectors.toList());
+		logger.info("composeValues", values);
 
 		return StringUtils.join(values, fieldSeparator);
 	}

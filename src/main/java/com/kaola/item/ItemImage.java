@@ -6,7 +6,7 @@ public class ItemImage extends Item {
 
 	private String image_url; // 图片url
 
-	private String image_type; // MAIN(1, "商品主图片"), APP(2, "APP标示");
+	private String image_type; // MAIN(1, "商品主图片"), APP(2, "APP标示"),TMT(3, "透明图"),LONG(4, "长图");
 
 	private int order_value; // 顺序
 

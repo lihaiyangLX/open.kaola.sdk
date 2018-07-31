@@ -25,7 +25,7 @@ public class KaolaCommTester extends KaolaCommBaseTester {
 	@Test
 	public void TestKaolaCommonUnitcodesGetRequest() {
 
-		JsonNode result = client.excute(new KaolaCommonUnitcodesGetRequest());
+		JsonNode result = client.execute(new KaolaCommonUnitcodesGetRequest());
 		if (!result.has("error_response")) {
 
 			KaolaCommonUnitcodesGetResponse response = (KaolaCommonUnitcodesGetResponse) JsonUtils.parse(result.toString(), new KaolaCommonUnitcodesGetRequest().getResponseClass());
@@ -37,7 +37,7 @@ public class KaolaCommTester extends KaolaCommBaseTester {
 //	@Test
 	public void testTaxnosGetReqeust() {
 
-		JsonNode result = client.excute(new KaolaCommonTaxnosGetRequest());
+		JsonNode result = client.execute(new KaolaCommonTaxnosGetRequest());
 		if (!result.has("error_response")) {
 
 			KaolaCommonTaxnosGetResponse response = (KaolaCommonTaxnosGetResponse) JsonUtils.parse(result.toString(), new KaolaCommonTaxnosGetRequest().getResponseClass());
@@ -49,7 +49,7 @@ public class KaolaCommTester extends KaolaCommBaseTester {
 //	@Test
 	public void testTaxnosGdetReqeust() {
 
-		JsonNode result = client.excute(new KaolaCommonTaxnosGetRequest());
+		JsonNode result = client.execute(new KaolaCommonTaxnosGetRequest());
 		if (!result.has("error_response")) {
 
 			KaolaCommonTaxnosGetResponse response = (KaolaCommonTaxnosGetResponse) JsonUtils.parse(result.toString(), new KaolaCommonTaxnosGetRequest().getResponseClass());

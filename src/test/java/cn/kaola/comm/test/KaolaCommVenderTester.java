@@ -30,7 +30,7 @@ public class KaolaCommVenderTester extends KaolaCommBaseTester {
 
 		JsonNode result = null;
 
-		result = client.excute(new KaolaVenderCategoryGetRequest());
+		result = client.execute(new KaolaVenderCategoryGetRequest());
 		if (!result.has("error_response")) {
 
 			KaolaVenderCategoryGetResponse response = (KaolaVenderCategoryGetResponse) JsonUtils.parse(result.toString().toLowerCase(), new KaolaVenderCategoryGetRequest().getResponseClass());
@@ -43,7 +43,7 @@ public class KaolaCommVenderTester extends KaolaCommBaseTester {
 	public void testGetBrand() {
 
 		JsonNode result = null;
-		result = client.excute(new KaolaVenderBrandGetRequest());
+		result = client.execute(new KaolaVenderBrandGetRequest());
 		if (!result.has("error_response")) {
 
 			KaolaVenderBrandGetResponse response = (KaolaVenderBrandGetResponse) JsonUtils.parse(result.toString(), new KaolaVenderBrandGetRequest().getResponseClass());
@@ -55,7 +55,7 @@ public class KaolaCommVenderTester extends KaolaCommBaseTester {
 	@Test
 	public void testVenderInfo() {
 
-		JsonNode result = client.excute(new KaolaVenderInfoGetRequest());
+		JsonNode result = client.execute(new KaolaVenderInfoGetRequest());
 		if (!result.has("error_response")) {
 
 			KaolaVenderInfoGetResponse response = (KaolaVenderInfoGetResponse) JsonUtils.parse(result.toString(), new KaolaVenderInfoGetRequest().getResponseClass());
@@ -67,7 +67,7 @@ public class KaolaCommVenderTester extends KaolaCommBaseTester {
 	@Test
 	public void testCountries() {
 
-		JsonNode result = client.excute(new KaolaCommonCountriesGetRequest());
+		JsonNode result = client.execute(new KaolaCommonCountriesGetRequest());
 		System.out.println(result);
 	}
 }

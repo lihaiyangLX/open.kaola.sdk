@@ -1,17 +1,17 @@
-package com.kaola.comm.item;
+package com.kaola.sdk.request;
 
-import com.kaola.base.KaolaRequest;
+import java.util.Map;
+
+import com.kaola.sdk.base.KopRequest;
+import com.kaola.sdk.response.ItemAddResponse;
+import com.kaola.utils.ObjectFieldManager;
 
 /**
- * 增加商品
+ * ItemAddRequest.java
  * @author LiHaiyang
- * 2018年3月19日
+ * 2018年5月23日
  */
-public class KaolaItemAddPartRequest extends KaolaRequest {
-
-	public KaolaItemAddPartRequest() {
-		super("kaola.item.addPart", KaolaItemAddPartResponse.class);
-	}
+public class ItemAddRequest implements KopRequest<ItemAddResponse> {
 
 	private String name; // *商品名称
 
@@ -51,7 +51,7 @@ public class KaolaItemAddPartRequest extends KaolaRequest {
 
 	private String image_urls; // 商品图片url和类型列表，url和类型用^分隔,多个图片之间用|分隔, 商品类型1:商品主图片 2:APP标示。1和2都至少传一张图片。
 
-	private String Sku_market_prices; // Sku市场价，多个sku的市场价用|分隔,支持2位小数，单位:元
+	private String sku_market_prices; // Sku市场价，多个sku的市场价用|分隔,支持2位小数，单位:元
 
 	private String sku_sale_prices; // Sku销售价，多个sku的销售价用|分隔,支持2位小数，单位:元 注意：如果商家是按供货价结算，那么系统将忽略该字段
 
@@ -61,7 +61,32 @@ public class KaolaItemAddPartRequest extends KaolaRequest {
 
 	private String sku_property_value; // 录入格式：(属性项id:属性值id:属性项中文:图片url|属性项id:-1:自定义属性值:图片url) 同一个sku不同的属性之间用;分隔，不同的sku属性之间用|分隔，只有颜色属性会有图片url
 
-	private String Sku_outer_id; // Sku外键id，不同的sku属性之间用|分隔
+	private String sku_outer_id; // Sku外键id，不同的sku属性之间用|分隔
+
+	@Override
+	public String getApiMethodName() {
+		return "kaola.item.addPart";
+	}
+
+	@Override
+	public Map<String, String> getTextParams() {
+
+		return ObjectFieldManager.StringMapReader(this);
+	}
+
+	@Override
+	public Long getTimestamp() {
+		return System.currentTimeMillis();
+	}
+
+	@Override
+	public void setTimestamp(Long timestamp) {}
+
+	@Override
+	public Class<ItemAddResponse> getResponseClass() {
+		// TODO Auto-generated method stub
+		return ItemAddResponse.class;
+	}
 
 	public String getName() {
 		return name;
@@ -216,11 +241,11 @@ public class KaolaItemAddPartRequest extends KaolaRequest {
 	}
 
 	public String getSku_market_prices() {
-		return Sku_market_prices;
+		return sku_market_prices;
 	}
 
 	public void setSku_market_prices(String sku_market_prices) {
-		Sku_market_prices = sku_market_prices;
+		this.sku_market_prices = sku_market_prices;
 	}
 
 	public String getSku_sale_prices() {
@@ -256,10 +281,10 @@ public class KaolaItemAddPartRequest extends KaolaRequest {
 	}
 
 	public String getSku_outer_id() {
-		return Sku_outer_id;
+		return sku_outer_id;
 	}
 
 	public void setSku_outer_id(String sku_outer_id) {
-		Sku_outer_id = sku_outer_id;
+		this.sku_outer_id = sku_outer_id;
 	}
 }

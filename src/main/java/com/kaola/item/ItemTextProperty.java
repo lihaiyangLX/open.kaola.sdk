@@ -7,7 +7,7 @@ import com.kaola.base.Item;
  * @author LiHaiyang
  * 2018年3月16日
  */
-public class ItemTextProperty extends Item {
+public class ItemTextProperty extends Item { 
 
 	private String prop_name_id; // 属性名id
 

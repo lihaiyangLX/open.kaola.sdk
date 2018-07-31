@@ -21,8 +21,8 @@ public class KaolaErrorMsgMatcher {
 		skuStockUpdateErrorMap.put("Stock_little_than_negative", "总库存不能小于冻结库存");
 	}
 
-	public static String matcher(String errorCode) {
+	public static String matcher(String errorCode, String defaultMsg) {
 
-		return skuStockUpdateErrorMap.getOrDefault(errorCode, errorCode);
+		return skuStockUpdateErrorMap.getOrDefault(errorCode, defaultMsg);
 	}
 }

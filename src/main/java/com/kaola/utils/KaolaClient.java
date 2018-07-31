@@ -144,7 +144,7 @@ public class KaolaClient {
 		}
 	}
 
-	public JsonNode excute(KaolaRequest request) {
+	public JsonNode execute(KaolaRequest request) {
 
 		String result = HttpsClient.doPost(buildUrl(request, true, null), new HashMap<>());
 
@@ -156,27 +156,32 @@ public class KaolaClient {
 				: response;
 	}
 
-	public JsonNode excuteUpload(KaolaUploadRequest request) {
+	public JsonNode executeUpload(KaolaUploadRequest request) {
 
-		JsonNode result = null;
-		
+		JsonNode response = null;
+
 		String timestamp = DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
 		Map<String, Object> values = composeRequestValues(request, timestamp, false);
 		String url = buildUrl(request, false, values);
 		values.put("timestamp", timestamp);
+		logger.info("upload values are " + values);
 		try {
 
-			String response = FileUplodUtils.doPost(url, values, request.getFileParams(), 0, 0);
-			if (response != null) {
+			String result = FileUplodUtils.doPost(url, values, request.getFileParams(), 0, 0);
 
-				result = getResponseJson(JsonUtils.read(response), request.getResponseClass());
+			// "error_response":{"msg":"服务方法(null)缺少应用键参数:app_key。请向服务端获取合法的appKey。","subErrors":null,"code":"missing_app_key"}}","time":"2018-05-21 11:30:56"
+			logger.info("excuteUpload response is " + result);
+			if (result != null) {
+
+				response = JsonUtils.read(result);
+				response = response.has("error_response") ? response : getResponseJson(response, request.getResponseClass());
 			}
 		} catch (IOException e) {
 
 			logger.error("upload has wrong " + e);
 		}
 
-		return result;
+		return response;
 	}
 
 	private JsonNode getResponseJson(JsonNode content, Class<?> clazz) {
@@ -190,7 +195,8 @@ public class KaolaClient {
 
 		values = values != null ? values : composeRequestValues(request, DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"), needRequestValues);
 
-		StringBuilder url = new StringBuilder(serverUrl + "?");	
+		logger.info("buildUrl values are ", values);
+		StringBuilder url = new StringBuilder(serverUrl + "?");
 		url.append(ValuesComposer.composeValues(values, Arrays.asList("responseClass"), "=", "&", false));
 
 		return url.toString();
